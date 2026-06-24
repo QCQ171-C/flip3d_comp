@@ -36,3 +36,6 @@ Right click the tray icon and choose the "Exit"
 
 - **vs [flip3d](https://github.com/ALTaleX531/flip3d):** compositor-native visuals (lower overhead), smooth fractional scroll while browsing, uDWM-aligned parallel exit rotation
 - **More complete:** `IAccessible` + `NotifyWinEvent` accessibility, Shell Hook live card add/remove
+
+
+`Credit to ALTaleX531`
