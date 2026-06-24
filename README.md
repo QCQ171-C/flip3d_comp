@@ -38,4 +38,4 @@ Right click the tray icon and choose the "Exit"
 - **More complete:** `IAccessible` + `NotifyWinEvent` accessibility, Shell Hook live card add/remove
 
 
-`Credit to ALTaleX531`
+*Credit to ALTaleX531*
