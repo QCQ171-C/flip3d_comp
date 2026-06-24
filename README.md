@@ -28,9 +28,9 @@ Eligible windows are shown as DWM shared thumbnails on a DirectComposition 3D ca
 - `Esc`: exit
 - `F5`: replay the enter animation
 
-  ## Exit
+## Exit
 
-  Right click the tray icon and choose the "Exit"
+Right click the tray icon and choose the "Exit"
 
 ## Notes
 
