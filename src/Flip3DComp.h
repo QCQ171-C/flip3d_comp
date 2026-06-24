@@ -59,9 +59,17 @@ public:
     // Public interface
     // ========================================================================
 
+    ~Flip3DCompApp();
+
     bool Initialize(HINSTANCE hInstance);
     HWND WindowHandle() const { return m_hwnd; }
     const wchar_t* InitErrorMessage() const { return m_initError.c_str(); }
+    bool IsWindowAlive() const { return m_hwnd != nullptr; }
+    void SetPostQuitOnDestroy(bool enabled) { m_postQuitOnDestroy = enabled; }
+    void Show();
+    void RequestClose();
+    void ActivateSelected();
+    void TickFrame();
     int  Run();
 
 private:
@@ -275,6 +283,7 @@ private:
     bool                    m_thumbnailsDirty = false; // coalesce WM 0x327 bursts
     UINT                    m_wmShellHook     = 0;
     bool                    m_shellHookRegistered = false;
+    bool                    m_postQuitOnDestroy = true;
 
     // ---- Frame timing ----
     std::chrono::steady_clock::time_point   m_prevFrame;
