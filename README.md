@@ -25,9 +25,12 @@ Eligible windows are shown as DWM shared thumbnails on a DirectComposition 3D ca
 
 - `Tab` / `Shift+Tab`, arrow keys, mouse wheel: scroll the carousel
 - `Enter` or left click a card: activate the selected window
-- `Home`: return to the original front window
 - `Esc`: exit
 - `F5`: replay the enter animation
+
+  ## Exit
+
+  Right click the tray icon and choose the "Exit"
 
 ## Notes
 
