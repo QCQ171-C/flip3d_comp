@@ -14,6 +14,17 @@
 #pragma comment(lib, "gdi32.lib")
 
 // ============================================================================
+// Flip3DCompApp::~Flip3DCompApp
+// ============================================================================
+Flip3DCompApp::~Flip3DCompApp()
+{
+    if (m_hwnd)
+        DestroyWindow(m_hwnd);
+
+    UnloadThumbApi();
+}
+
+// ============================================================================
 // Flip3DCompApp::Initialize
 // ============================================================================
 bool Flip3DCompApp::Initialize(HINSTANCE hInstance)
@@ -68,6 +79,52 @@ bool Flip3DCompApp::Initialize(HINSTANCE hInstance)
     Update(0.0f);
 
     return true;
+}
+
+// ============================================================================
+// Flip3DCompApp::Show
+// ============================================================================
+void Flip3DCompApp::Show()
+{
+    if (!m_hwnd)
+        return;
+
+    ApplyFullscreenLayout();
+    ShowWindow(m_hwnd, SW_SHOW);
+    SetForegroundWindow(m_hwnd);
+    UpdateWindow(m_hwnd);
+}
+
+// ============================================================================
+// Flip3DCompApp::RequestClose
+// ============================================================================
+void Flip3DCompApp::RequestClose()
+{
+    if (m_hwnd)
+        PostMessageW(m_hwnd, WM_CLOSE, 0, 0);
+}
+
+// ============================================================================
+// Flip3DCompApp::ActivateSelected
+// ============================================================================
+void Flip3DCompApp::ActivateSelected()
+{
+    if (m_hwnd)
+        PostMessageW(m_hwnd, WM_KEYDOWN, VK_RETURN, 0);
+}
+
+// ============================================================================
+// Flip3DCompApp::TickFrame
+// ============================================================================
+void Flip3DCompApp::TickFrame()
+{
+    if (m_minimized || !m_hwnd)
+        return;
+
+    auto now = std::chrono::steady_clock::now();
+    float dt = std::chrono::duration<float>(now - m_prevFrame).count();
+    m_prevFrame = now;
+    Update(std::min(dt, 0.05f));
 }
 
 // ============================================================================
@@ -206,7 +263,9 @@ LRESULT Flip3DCompApp::HandleMessage(UINT msg, WPARAM wParam, LPARAM lParam)
     case WM_DESTROY:
         ShutdownAccessibility();
         LeaveFlip3DWindowMode();
-        PostQuitMessage(0);
+        m_hwnd = nullptr;
+        if (m_postQuitOnDestroy)
+            PostQuitMessage(0);
         return 0;
     }
 
